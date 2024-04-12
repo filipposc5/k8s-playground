@@ -61,3 +61,17 @@ spec:
         volumeMounts:
         - name: storage # must match the volume name, above
           mountPath: "/storage"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio
+  labels:
+    app: minio
+spec:
+  clusterIP: None
+  ports:
+    - port: 9000
+      name: minio
+  selector:
+    app: minio
