@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# set -e
+set -euo pipefail
 curl -s https://fluxcd.io/install.sh | sudo bash
 flux install
 apt install awscli -y
@@ -22,4 +22,4 @@ kubectl create cm foo --from-literal a=b --dry-run=client -o yaml > cm1.yaml
 aws s3 --endpoint http://${minio_ip}:9000 ls s3://fluxcd/
 
 # gotcha: --endpoint requires no scheme, otherwise throws weird error "Endpoint url cannot have fully qualified paths."
-flux create source bucket minio  --endpoint minio.default.svc:9000 --bucket-name fluxcd --insecure --secret-ref minio-bucket-secret -n flux-system --interval=2h
+flux create source bucket minio  --endpoint minio.default.svc.cluster.local.:9000 --bucket-name fluxcd --insecure --secret-ref minio-bucket-secret -n flux-system --interval=2h
