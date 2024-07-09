@@ -1,6 +1,6 @@
 
 ~/.aws/credentials:
-	gencreds.sh
+	./gencreds.sh
 
 minio: ~/.aws/credentials
 	kubectl apply -f minio.yaml
