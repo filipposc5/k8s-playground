@@ -8,12 +8,6 @@ apt install awscli -y
 minio_ip=$(kubectl get pod -o json -l app=minio | jq -r '.items | .[].status.podIP')
 # flux create source --export bucket minio  --endpoint http://${minio_ip}:9000 --bucket-name fluxcd --insecure > bucket.yaml
 
-mkdir -m 700 ~/.aws
-cat << EOF > ~/.aws/credentials
-[default]
-aws_access_key_id = minio
-aws_secret_access_key = minio123
-EOF
 
 aws s3 --endpoint http://${minio_ip}:9000 mb s3://fluxcd
 
