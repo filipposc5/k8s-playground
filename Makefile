@@ -1,3 +1,4 @@
+FLUX_VERSION ?= 2.3.0
 
 ~/.aws/credentials:
 	./gencreds.sh
@@ -8,7 +9,7 @@ minio: ~/.aws/credentials
 	kubectl apply -f bucket-secret.yaml
 
 flux:
-	./flux.sh
+	./flux.sh $(FLUX_VERSION)
 
 # eval $(make minio-ip)
 minio-ip:
